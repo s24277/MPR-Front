@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="~{common/general :: common-header"></head>
+<body>
+<p>Cows</p>
+<table border="1">
+    <thead>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Age</th>
+    </thead>
+    <tbody>
+    <tr th:each="cow : ${cows}">
+        <td th:text="${cow.id}"></td>
+        <td th:text="${cow.name}"></td>
+        <td th:text="${cow.age}"></td>
+        <td>
+            <a th:href="@{'/editCapybara/' + ${cow.id}}">Edit</a>
+            <a>Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a th:href="@{/cowNew}">Add Cow</a>
+</body>
+</html>
