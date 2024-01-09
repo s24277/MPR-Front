@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.w3.org/1999/xhtml">
-<head th:replace="~{common/general :: common-header"></head>
+<head>
+    <meta charset="ISO-8859-1">
+    <link href="css/styles.css" rel="stylesheet">
+    <title>Welcome!</title>
+</head>
 <body>
 <p>Cows</p>
 <table border="1">
@@ -15,7 +19,7 @@
         <td th:text="${cow.name}"></td>
         <td th:text="${cow.age}"></td>
         <td>
-            <a th:href="@{'/editCapybara/' + ${cow.id}}">Edit</a>
+            <a th:href="@{'/editCow/' + ${cow.id}}">Edit</a>
             <a>Delete</a>
         </td>
     </tr>

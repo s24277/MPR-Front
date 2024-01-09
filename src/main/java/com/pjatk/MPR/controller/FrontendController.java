@@ -28,14 +28,14 @@ public class FrontendController {
         return this.restService.getAllCows();
     }
 
-    @GetMapping(value = "/cowNew")
+    @GetMapping("/cowNew")
     public String getAddView(Model model){
-        model.addAttribute("cow",new Cow("", 10));
+        model.addAttribute("cow",new Cow(0,"", 0));
         return "cowNew";
     }
 
     @PostMapping(value = "/cowNew")
-    public String cowNew(@ModelAttribute Cow cow) throws AlreadyExists {
+    public String cowNew(Model model,@ModelAttribute Cow cow){
         restService.addCow(cow);
         return "redirect:/welcome";
     }

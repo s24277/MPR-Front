@@ -16,6 +16,7 @@ public class MyRestService {
 
     public static final String URL = "http://localhost:8080";
     private RestClient restClient;
+    public MyRestService() {this.restClient = RestClient.create();}
 
 //    @Autowired
 //    public MyRestService() {
@@ -35,16 +36,15 @@ public class MyRestService {
         return cows;
     }
 
-    public void addCow(Cow cow) throws AlreadyExists {
+    public void addCow(Cow cow){
         // Sprawdź, czy krowa o podanej nazwie już istnieje
-        if (getAllCows().stream().anyMatch(existingCow -> existingCow.getName().equals(cow.getName()))) {
-            throw new AlreadyExists("Cow with name " + cow.getName() + " already exists");
-        }
+//        if (getAllCows().stream().anyMatch(existingCow -> existingCow.getName().equals(cow.getName()))) {
+//            throw new AlreadyExists("Cow with name " + cow.getName() + " already exists");
+//        }
 
         // Wywołaj endpoint do dodawania krowy
-        ResponseEntity<Void> response = restClient
-                .post()
-                .uri(URL + "/addCow")
+        restClient.post()
+                .uri(URL + "/cowNew")
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(cow)
                 .retrieve()
