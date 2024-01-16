@@ -18,16 +18,10 @@ public class FrontendController {
     public FrontendController(MyRestService restService) {
         this.restService = restService;
     }
-
-//    @GetMapping("/cow/{name}")
-//    public Cow getCowByName(@PathVariable("name") String name) {
-//        return this.restService.getCowByName(name);
-//    }
     @GetMapping("/showCow")
     public List<Cow> showCow() {
         return this.restService.getAllCows();
     }
-
     @GetMapping("/cowNew")
     public String getAddView(Model model){
         model.addAttribute("cow",new Cow(0,"", 0));
@@ -40,21 +34,25 @@ public class FrontendController {
         return "redirect:/welcome";
     }
 
-//    @PostMapping("/cowNew")
-//    public void cowNew(@RequestBody Cow cow) throws AlreadyExists {
-//        this.restService.addCow(cow);
-//    }
+    @GetMapping("/editCow/{id}")
+    public String cowEdit(@PathVariable Long id, Model model){
+        Cow cow = restService.getCowById(id);
 
-    @PutMapping("/editCow/{id}")
-    public void cowEdit(){
+        model.addAttribute("cow", cow);
 
+        return "editCow";
     }
+    @PostMapping("/editCow/{id}")
+    public String cowEditSubmit(@PathVariable Long id, @ModelAttribute Cow cow){
+        restService.editCow(id, cow);
+        return "redirect:/welcome";
+    }
+    @PostMapping("/deleteCow/{id}")
+    public String cowDel(@PathVariable Long id) {
+        restService.deleteCow(id);
 
-//    @DeleteMapping("/cowDel/{name}")
-//    public void cowDel(@PathVariable("name") String name) {
-//        this.restService.deleteCowByName(name);
-//    }
-
+        return "redirect:/welcome";
+    }
     @GetMapping("/welcome")
     public String getViewAll(Model model){
         model.addAttribute("cows",restService.getAllCows());

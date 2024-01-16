@@ -20,7 +20,7 @@
         <td th:text="${cow.age}"></td>
         <td>
             <a th:href="@{'/editCow/' + ${cow.id}}">Edit</a>
-            <a>Delete</a>
+            <a th:href="@{'/deleteCow/' + ${cow.id}}">Delete</a>
         </td>
     </tr>
     </tbody>

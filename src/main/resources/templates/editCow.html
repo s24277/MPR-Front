@@ -7,7 +7,7 @@
 </head>
 <body>
 <p>Add Cow</p>
-<form action="#" th:object="${cow}" th:action="@{/cowNew}" method="POST">
+<form action="#" th:object="${cow}" th:action="@{/editCow/{id}}" method="POST">
     <div>
         <label>Name</label>
         <input th:field="*{name}" type="input" name="name" required>
@@ -16,8 +16,10 @@
         <label>Age</label>
         <input th:field="*{age}" type="input" name="age" required>
     </div>
-    <button type="summit">Save</button>
+    <button type="submit">Save</button>
+    <a th:href="@{/welcome}">
+        <button type="button">Cancel</button>
+    </a>
 </form>
-
 </body>
 </html>
